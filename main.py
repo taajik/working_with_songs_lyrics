@@ -87,9 +87,9 @@ search_parser = subparsers.add_parser(
     description=ts["search"]["desc"],
     help=ts["search"]["help"]
 )
-add_common_arguments(search_parser, path=ts["search"]["args"]["path"])
-search_parser.add_argument("-q", nargs="+", dest="q_list", metavar="phrase",
+search_parser.add_argument("q_list", nargs="+", metavar="phrase",
                            help=ts["search"]["args"]["q_list"])
+add_common_arguments(search_parser, path=ts["search"]["args"]["path"])
 
 
 if __name__ == "__main__":

@@ -51,7 +51,7 @@
         "epil": "",
         "args": {
             "path": "the full path to the root folder containing lyrics text files",
-            "q_list": "list of search phrases"
+            "q_list": "one or more search phrase"
         }
     }
 }
