@@ -54,9 +54,8 @@ def auto_add_lyrics(path, genius, recursive=False, ignore_ptrn=None,
     for file in sorted(path.iterdir()):
         if ignore_ptrn and fnmatch.fnmatch(file.name, ignore_ptrn):
             continue
-        if file.is_file():
-            i += 1
-            print("\n" + str(i).rjust(3), end=". ")
+        if file.is_file():# and " - " in path.name:
+            print("\n" + str(i+1).rjust(3), end=". ")
 
             try:
                 song = Song(file)
@@ -68,9 +67,14 @@ def auto_add_lyrics(path, genius, recursive=False, ignore_ptrn=None,
             print(f'"{t}" by {aa}')
 
             # Get the lyrics of this song.
+            success_msg = "Done."
             try:
                 if is_album:
-                    lyrics = album.tracks[i-1].song.lyrics
+                    trk = album.tracks[i].song
+                    # Make sure the correct lyrics is being put on the song.
+                    if trk.title.replace("’", "'").casefold() != t.casefold():
+                        success_msg = f"Done. {trk.title} added."
+                    lyrics = trk.lyrics
                 else:
                     lyrics = get_song_lyrics(t, aa, genius)
             except Exception as e:
@@ -82,9 +86,10 @@ def auto_add_lyrics(path, genius, recursive=False, ignore_ptrn=None,
             try:
                 song.lyrics = lyrics
                 song.save()
-                report(True, "Done.")
+                report(True, success_msg)
             except Exception:
                 report(False, " X Lyrics Error.")
+            i += 1
 
         # if 'file' is a folder, store it to call the function on it later.
         elif file.is_dir():

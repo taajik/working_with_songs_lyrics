@@ -71,7 +71,7 @@ class MP3Song:
             self.tags.lyrics.set(l)
 
     def save(self):
-        self.tags.save(version=eyed3.id3.ID3_V2_4, encoding="utf8")
+        self.tags.save(encoding="utf8")
 
 
 class M4ASong:

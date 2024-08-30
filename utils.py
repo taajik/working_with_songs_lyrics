@@ -4,8 +4,8 @@ import re
 
 
 # Number of
-successful = 0
-unsuccessful = 0
+_successful = 0
+_unsuccessful = 0
 
 
 def report(is_successful, message=""):
@@ -13,11 +13,11 @@ def report(is_successful, message=""):
     unsuccessful lyrics attachments.
     """
 
-    global successful, unsuccessful
+    global _successful, _unsuccessful
     if is_successful:
-        successful += 1
+        _successful += 1
     else:
-        unsuccessful += 1
+        _unsuccessful += 1
 
     if message:
         print(message)
@@ -25,8 +25,8 @@ def report(is_successful, message=""):
 
 def print_report(suc_title, unsuc_title):
     print(
-        f"\n\n\n {suc_title}: {successful}"
-        f"\n {unsuc_title}: {unsuccessful}"
+        f"\n\n\n {suc_title}: {_successful}"
+        f"\n {unsuc_title}: {_unsuccessful}"
     )
 
 
